@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
-function PaymentType({ title, icon }) {
+function PaymentType({ title, icon, onPress }) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.iconContainer}>
         <View style={styles.iconCircle}>
           <FontAwesome name={icon} size={26} color="white" />

@@ -4,7 +4,7 @@ import { Entypo, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import Wallet from './Wallet';
 import Card from './CardsFlow/Card';
 import History from './History';
-import Payment from './PaymentsFlow/Payment';
+import PaymentFlowScreen from './PaymentsFlow/PaymentFlowStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,6 +18,7 @@ function MainFlowStack() {
         tabBarActiveTintColor: '#523CF8',
         tabBarActiveBackgroundColor: '#2F2E33',
         tabBarInactiveBackgroundColor: '#2F2E33',
+        tabBarHideOnKeyboard: true,
         tabBarStyle: {
           height: 70,
           borderTopLeftRadius: 25,
@@ -60,7 +61,7 @@ function MainFlowStack() {
       />
       <Tab.Screen
         name="Payment"
-        component={Payment}
+        component={PaymentFlowScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <Entypo name="text-document-inverted" size={24} color={color} />

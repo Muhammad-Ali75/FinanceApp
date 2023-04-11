@@ -3,8 +3,22 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { ButtonGroup } from '@rneui/base';
 import { Entypo } from '@expo/vector-icons';
 
+const currencyRates = {
+  EUR: 0.84,
+  USD: 1,
+  GBP: 0.73,
+};
+
 function CardPartial({ title, cardNumber, balance }) {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [amount, setAmount] = useState(parseInt(balance));
+  const currencies = ['EUR', 'USD', 'GBP'];
+  const updateAmount = (index) => {
+    const selectedCurrency = currencies[index];
+    const exchangeRate = currencyRates[selectedCurrency];
+    const convertedAmount = parseInt(balance) * exchangeRate;
+    setAmount(convertedAmount);
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
@@ -15,6 +29,7 @@ function CardPartial({ title, cardNumber, balance }) {
           selectedIndex={selectedIndex}
           onPress={(value) => {
             setSelectedIndex(value);
+            updateAmount(value);
           }}
           innerBorderStyle={{ color: 'transparent' }}
           selectedButtonStyle={{ backgroundColor: '#523CF8' }}
@@ -24,7 +39,7 @@ function CardPartial({ title, cardNumber, balance }) {
         />
       </View>
       <View style={{ marginTop: 30 }}>
-        <Text style={styles.balance}>{balance}</Text>
+        <Text style={styles.balance}>{amount}</Text>
         <Text style={{ color: 'white', fontSize: 16 }}>Current balance</Text>
       </View>
       <TouchableOpacity style={styles.buttonContainer}>

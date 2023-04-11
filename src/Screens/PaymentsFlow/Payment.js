@@ -7,6 +7,7 @@ import {
   FlatList,
   ScrollView,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { SegmentedButtons } from 'react-native-paper';
 import SafeArea from '../../Components/SafeArea';
@@ -34,25 +35,25 @@ const CARD_DATA = [
     key: '1',
     title: 'Card 1',
     cardNumber: '1233-2313-4141-1123',
-    balance: '34,000',
+    balance: '34000',
   },
   {
     key: '2',
     title: 'Card 2',
     cardNumber: '1244-2313-4141-4123',
-    balance: '34,000',
+    balance: '88000',
   },
   {
     key: '3',
     title: 'Card 3',
     cardNumber: '1233-2313-4141-1314',
-    balance: '36,000',
+    balance: '43000',
   },
   {
     key: '4',
     title: 'Card 4',
     cardNumber: '1233-2313-4141-9070',
-    balance: '36,000',
+    balance: '31000',
   },
 ];
 
@@ -89,6 +90,7 @@ function Payment() {
           </Text>
         </View>
       ) : (
+        //! add converter
         <Main />
       )}
     </SafeArea>
@@ -129,6 +131,12 @@ const styles = StyleSheet.create({
 });
 
 function Main() {
+  const navigation = useNavigation();
+
+  function onPressHandler(title) {
+    navigation.navigate('RecipientInfo', { title: title });
+  }
+
   return (
     <>
       <FlatList
@@ -153,9 +161,21 @@ function Main() {
         }}
       >
         <ScrollView showsVerticalScrollIndicator={false}>
-          <PaymentType title={'USD'} icon={'usd'} />
-          <PaymentType title={'GBP'} icon={'gbp'} />
-          <PaymentType title={'EUR'} icon={'eur'} />
+          <PaymentType
+            title={'USD'}
+            icon={'usd'}
+            onPress={() => onPressHandler('usd')}
+          />
+          <PaymentType
+            title={'GBP'}
+            icon={'gbp'}
+            onPress={() => onPressHandler('gbp')}
+          />
+          <PaymentType
+            title={'EUR'}
+            icon={'eur'}
+            onPress={() => onPressHandler('eur')}
+          />
         </ScrollView>
       </View>
     </>
