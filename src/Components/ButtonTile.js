@@ -18,6 +18,22 @@ function Icon({ title }) {
       return <AntDesign name="adduser" size={24} color="white" />;
     case 'save':
       return <FontAwesome name="save" size={24} color="white" />;
+    case 'coin':
+      return (
+        <MaterialCommunityIcons
+          name="hand-coin-outline"
+          size={22}
+          color="white"
+        />
+      );
+    case 'card':
+      return <FontAwesome name="credit-card" size={20} color="white" />;
+
+    case 'location':
+      return <Entypo name="location-pin" size={24} color="white" />;
+    case 'exchange':
+      return <FontAwesome name="exchange" size={18} color="white" />;
+
     default:
       return (
         <MaterialCommunityIcons name="format-text" size={24} color="white" />

@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, Ionicons, MaterialIcons } from '@expo/vector-icons';
 
 import Wallet from './Wallet';
-import Card from './CardsFlow/Card';
+import CardFlowScreen from './CardsFlow/CardFlowStack';
 import History from './History';
 import PaymentFlowScreen from './PaymentsFlow/PaymentFlowStack';
 
@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 function MainFlowStack() {
   return (
     <Tab.Navigator
-      initialRouteName="Payment"
+      initialRouteName="Cards"
       screenOptions={{
         tabBarShowLabel: false,
         headerShown: false,
@@ -43,7 +43,7 @@ function MainFlowStack() {
       />
       <Tab.Screen
         name="Cards"
-        component={Card}
+        component={CardFlowScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <Ionicons name="ios-card-sharp" size={24} color={color} />

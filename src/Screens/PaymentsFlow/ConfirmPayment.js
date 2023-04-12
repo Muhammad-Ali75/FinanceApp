@@ -28,20 +28,20 @@ const currencyRates = {
 
 function ConfirmPayment({ navigation }) {
   const [selectedIndex, setSelectedIndex] = useState(1);
-  const [amount, setAmount] = useState(parseInt(CARD_DATA.balance));
+  const [amount, setAmount] = useState(`${CARD_DATA.balance} USD`);
   const currencies = ['EUR', 'USD', 'GBP'];
 
   const updateAmount = (index) => {
     const selectedCurrency = currencies[index];
     const exchangeRate = currencyRates[selectedCurrency];
     const convertedAmount = parseInt(CARD_DATA.balance) * exchangeRate;
-    setAmount(convertedAmount);
+    setAmount(`${convertedAmount} ${currencies[index]}`);
   };
   function onPressHandler() {
     navigation.goBack();
   }
   function onCancelPress() {
-    navigation.goBack();
+    navigation.popToTop();
   }
   function onConfirmPress() {
     navigation.navigate('PaymentComplete');

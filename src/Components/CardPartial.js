@@ -11,13 +11,13 @@ const currencyRates = {
 
 function CardPartial({ title, cardNumber, balance }) {
   const [selectedIndex, setSelectedIndex] = useState(1);
-  const [amount, setAmount] = useState(parseInt(balance));
+  const [amount, setAmount] = useState(`${balance} USD`);
   const currencies = ['EUR', 'USD', 'GBP'];
   const updateAmount = (index) => {
     const selectedCurrency = currencies[index];
     const exchangeRate = currencyRates[selectedCurrency];
     const convertedAmount = parseInt(balance) * exchangeRate;
-    setAmount(convertedAmount);
+    setAmount(`${convertedAmount} ${currencies[index]}`);
   };
   return (
     <View style={styles.container}>
