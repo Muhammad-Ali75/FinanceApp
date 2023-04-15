@@ -14,7 +14,28 @@ import LimitSettings from './LimitSettings';
 
 const CardFlow = createStackNavigator();
 
-const CardFlowScreen = () => {
+const CardFlowScreen = ({ navigation, route }) => {
+  const tabHiddenRoutes = [
+    'ChangePin',
+    'SecuritySettings',
+    'CardDetail',
+    'LimitSettings',
+  ];
+  useLayoutEffect(() => {
+    if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
+      navigation.setOptions({ tabBarStyle: { display: 'none' } });
+    } else {
+      navigation.setOptions({
+        tabBarStyle: {
+          height: 70,
+          borderTopLeftRadius: 25,
+          borderTopRightRadius: 25,
+          position: 'absolute',
+          overflow: 'hidden',
+        },
+      });
+    }
+  }, [navigation, route]);
   return (
     <CardFlow.Navigator screenOptions={{ headerShown: false }}>
       <CardFlow.Screen name="Card" component={Card} />

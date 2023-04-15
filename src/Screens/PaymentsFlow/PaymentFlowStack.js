@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
   getFocusedRouteNameFromRoute,
@@ -14,7 +15,29 @@ import PaymentComplete from './PaymentComplete';
 
 const PaymentFlow = createStackNavigator();
 
-const PaymentFlowScreen = () => {
+const PaymentFlowScreen = ({ navigation, route }) => {
+  const tabHiddenRoutes = [
+    'RecipientInfo',
+    'PaymentInfo',
+    'OtherInfo',
+    'ConfirmPayment',
+    'PaymentComplete',
+  ];
+  useLayoutEffect(() => {
+    if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
+      navigation.setOptions({ tabBarStyle: { display: 'none' } });
+    } else {
+      navigation.setOptions({
+        tabBarStyle: {
+          height: 70,
+          borderTopLeftRadius: 25,
+          borderTopRightRadius: 25,
+          position: 'absolute',
+          overflow: 'hidden',
+        },
+      });
+    }
+  }, [navigation, route]);
   return (
     <PaymentFlow.Navigator screenOptions={{ headerShown: false }}>
       <PaymentFlow.Screen name="Pay" component={Payment} />
